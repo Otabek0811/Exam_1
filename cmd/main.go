@@ -7,6 +7,7 @@ import (
 	"app/storage/jsondb"
 	"fmt"
 	"sort"
+	"time"
 )
 
 func User(con *controller.Controller) {
@@ -23,40 +24,42 @@ func main() {
 		panic("Failed connect to json:" + err.Error())
 	}
 	con := controller.NewController(&cfg, strg)
+
 	/*	Task-1	*/
-	OrderGetList(con)
+	Task_1(con)
 
 	/*	Task-2	*/
-	// OrderGetList(con)
+	// Task_2(con)
 
 	/*	Task-3	*/
-	// OrderGetList(con)
+	// user_id:="76d58bdf-bca7-4484-846c-36383327f03c"
+	// Task_3(con,user_id)
 
 	/*	Task-4	*/
-	// OrderGetList(con)
+	// user_id:="76d58bdf-bca7-4484-846c-36383327f03c"
+	// Task_4(con,user_id)
 
 	/*	Task-5	*/
-	// OrderGetList(con)
+	// Task_5(con)
 
 	/*	Task-6/7	*/
-	// OrderGetList(con)
+	// Task_6_7(con)
 
 	/*	Task-8	*/
-	// OrderGetList(con)
+	// Task_8(con)
 
 	/*    Task-9      */
-	// CategoryGetList(con)
+	// Task_9(con)
 
 	/*		Task - 10*/
-	// OrderGetList(con)
+	// Task_10(con)
 
 	/*   Task -11   */
-	// Order(con)
+	// Task_11(con)
 
-	
 }
 
-func Order(con *controller.Controller) {
+func Task_11(con *controller.Controller) {
 	con.OrderCreate(&models.CreateOrder{
 		UserId:    "204ff9b0-3f4e-41b3-a436-3a1fce028fa6",
 		ProductId: "46a65fb0-650b-4b4a-a878-ce0d1539adb2",
@@ -65,7 +68,7 @@ func Order(con *controller.Controller) {
 
 }
 
-func OrderGetList(con *controller.Controller) {
+func Task_1(con *controller.Controller) {
 	respOrder, err := con.OrderGetList(&models.OrderGetListRequest{
 		Offset: 0,
 		Limit:  10,
@@ -75,7 +78,6 @@ func OrderGetList(con *controller.Controller) {
 		fmt.Println(err)
 	}
 
-	/*        Task-1                      */
 	sort.Slice(respOrder.Orders, func(i, j int) bool {
 		return respOrder.Orders[i].DateTime < respOrder.Orders[j].DateTime
 	})
@@ -84,260 +86,327 @@ func OrderGetList(con *controller.Controller) {
 		fmt.Printf("%+v", order)
 		fmt.Println()
 	}
+}
 
-	/*        Task_2     */
+func Task_2(con *controller.Controller){
+	respOrder, err := con.OrderGetList(&models.OrderGetListRequest{
+		Offset: 0,
+		Limit:  10,
+	})
 
-	// a := "2023-06-22 11:21:05"
+	if err != nil {
+		fmt.Println(err)
+	}
 
-	// b := "2023-06-22 11:22:05"
+	a := "2023-06-22 11:21:05"
 
-	// time1, _ := time.Parse("2006-01-02 15:04:05", a)
-	// time2, _ := time.Parse("2006-01-02 15:04:05", b)
+	b := "2023-06-22 11:22:05"
 
-	// for _, order := range respOrder.Orders {
-	// 	x, _ := time.Parse("2006-01-02 15:04:05", order.DateTime)
+	time1, _ := time.Parse("2006-01-02 15:04:05", a)
+	time2, _ := time.Parse("2006-01-02 15:04:05", b)
 
-	// 	if time1.Before(x) && time2.After(x) {
-	// 		fmt.Printf("%+v", order)
-	// 		fmt.Println()
+	for _, order := range respOrder.Orders {
+		x, _ := time.Parse("2006-01-02 15:04:05", order.DateTime)
 
-	// 	}
-	// }
+		if time1.Before(x) && time2.After(x) {
+			fmt.Printf("%+v", order)
+			fmt.Println()
 
-	/*			Task-3					*/
+		}
+	}
+}
 
-	// usrID := "76d58bdf-bca7-4484-846c-36383327f03c"
-	// fmt.Println(GetUserByID(con,usrID))
-	// for _, order := range respOrder.Orders {
-	// 	if order.UserId == usrID && order.Status {
-	// 		fmt.Printf("%+v", order)
-	// 		fmt.Println()
-	// 	}
+func Task_3(con *controller.Controller,id string){
+	respOrder, err := con.OrderGetList(&models.OrderGetListRequest{
+		Offset: 0,
+		Limit:  10,
+	})
 
-	// }
+	if err != nil {
+		fmt.Println(err)
+	}
+	usrID := id
+	fmt.Println(GetUserByID(con,usrID))
+	for _, order := range respOrder.Orders {
+		if order.UserId == usrID && order.Status {
+			fmt.Printf("%+v", order)
+			fmt.Println()
+		}
 
-	/*			Task-4				*/
+	}
 
-	// usrID:="76d58bdf-bca7-4484-846c-36383327f03c"
-	// sum:=0
-	// for _, order := range respOrder.Orders {
-	// 	if order.UserId==usrID && order.Status{
-	// 		sum+=order.Sum
-	// 	}
+}
 
-	// }
+func Task_4(con *controller.Controller,id string){
+	respOrder, err := con.OrderGetList(&models.OrderGetListRequest{
+		Offset: 0,
+		Limit:  10,
+	})
 
-	// fmt.Printf("%+v")
-	// fmt.Println(sum)
+	if err != nil {
+		fmt.Println(err)
+	}
 
-	/*			Task-5				*/
+	usrID:=id
+	sum:=0
+	for _, order := range respOrder.Orders {
+		if order.UserId==usrID && order.Status{
+			sum+=order.Sum
+		}
 
-	// respProducts,err:=con.ProductGetList(&models.ProductGetListRequest{})
+	}
 
-	// if err!=nil{
-	// 	fmt.Println(err)
-	// }
+	fmt.Printf("%+v")
+	fmt.Println(sum)
 
-	// for _,val:= range respProducts.Products{
-	// 	count:=0
-	// 	for _,val2:=range respOrder.Orders{
-	// 		if val.Id==val2.ProductId{
-	// 			count+=val2.Count
-	// 		}
-	// 	}
-	// 	fmt.Println(val.Name,count)
-	// }
+}
 
-	/*			Task-6/7(>,<)		*/
+func Task_5(con *controller.Controller){
+	respOrder, err := con.OrderGetList(&models.OrderGetListRequest{
+		Offset: 0,
+		Limit:  10,
+	})
 
-	// m := make(map[string]int)
+	if err != nil {
+		fmt.Println(err)
+	}
+	respProducts,err:=con.ProductGetList(&models.ProductGetListRequest{})
 
-	// respProducts, err := con.ProductGetList(&models.ProductGetListRequest{})
+	if err!=nil{
+		fmt.Println(err)
+	}
 
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
+	for _,val:= range respProducts.Products{
+		count:=0
+		for _,val2:=range respOrder.Orders{
+			if val.Id==val2.ProductId{
+				count+=val2.Count
+			}
+		}
+		fmt.Println(val.Name,count)
+	}
 
-	// for _, val := range respProducts.Products {
-	// 	count := 0
-	// 	for _, val2 := range respOrder.Orders {
-	// 		if val.Id == val2.ProductId {
-	// 			count += val2.Count
-	// 		}
-	// 	}
-	// 	m[val.Name] = count
-	// }
+}
 
-	// keys := make([]string, 0, len(m))
+func Task_6_7(con *controller.Controller){
+	respOrder, err := con.OrderGetList(&models.OrderGetListRequest{
+		Offset: 0,
+		Limit:  10,
+	})
 
-	// for key := range m {
-	// 	keys = append(keys, key)
-	// }
-	// sort.SliceStable(keys, func(i, j int) bool {
-	// 	return m[keys[i]] > m[keys[j]]
-	// })
+	if err != nil {
+		fmt.Println(err)
+	}
 
-	// for ind, k := range keys {
+	m := make(map[string]int)
 
-	// 	fmt.Println(k, m[k])
-	// 	if ind==9{
-	// 		break
-	// 	}
-	// }
+	respProducts, err := con.ProductGetList(&models.ProductGetListRequest{})
 
-	/*		Task---8			*/
+	if err != nil {
+		fmt.Println(err)
+	}
 
-	// m := make(map[string]int)
+	for _, val := range respProducts.Products {
+		count := 0
+		for _, val2 := range respOrder.Orders {
+			if val.Id == val2.ProductId {
+				count += val2.Count
+			}
+		}
+		m[val.Name] = count
+	}
 
-	// for _, val := range respOrder.Orders {
-	// 	count := 0
+	keys := make([]string, 0, len(m))
 
-	// 	for _, val2 := range respOrder.Orders {
+	for key := range m {
+		keys = append(keys, key)
+	}
+	sort.SliceStable(keys, func(i, j int) bool {
+		return m[keys[i]] > m[keys[j]]
+	})
 
-	// 		if val.DateTime[:10] == val2.DateTime[:10] {
-	// 			count += val2.Count
+	for ind, k := range keys {
 
-	// 		}
+		fmt.Println(k, m[k])
+		if ind==9{
+			break
+		}
+	}
 
-	// 	}
+}
 
-	// 	val.DateTime = val.DateTime[:10]
+func Task_8(con *controller.Controller){
+	respOrder, err := con.OrderGetList(&models.OrderGetListRequest{
+		Offset: 0,
+		Limit:  10,
+	})
 
-	// 	m[val.DateTime] = count
-	// 	if ind==9{
-	// 		break
-	// 	}
-	// }
+	if err != nil {
+		fmt.Println(err)
+	}
 
-	// keys := make([]string, 0, len(m))
+	m := make(map[string]int)
 
-	// for key := range m {
-	// 	keys = append(keys, key)
-	// }
-	// sort.SliceStable(keys, func(i, j int) bool {
-	// 	return m[keys[i]] > m[keys[j]]
-	// })
+	for _, val := range respOrder.Orders {
+		count := 0
 
-	// for ind, k := range keys {
+		for _, val2 := range respOrder.Orders {
 
-	// 	fmt.Println(k, m[k])
-	// }
+			if val.DateTime[:10] == val2.DateTime[:10] {
+				count += val2.Count
 
-	/*				Task---10          */
-	// var list []string
+			}
 
-	// for _, val := range respOrder.Orders {
+		}
 
-	// 	if val.Status {
-	// 		list = append(list, val.UserId)
-	// 	}
-	// }
-	// m := make(map[string]int)
+		val.DateTime = val.DateTime[:10]
 
-	// for _, value := range list {
-	// 	k := 0
-	// 	for _, val := range respOrder.Orders {
-	// 		if value == val.UserId && val.Status {
-	// 			k += val.Count
-	// 		}
-	// 	}
-	// 	m[value] = k
-	// }
+		m[val.DateTime] = count
+		
+	}
 
-	// keys := make([]string, 0, len(m))
+	keys := make([]string, 0, len(m))
 
-	// for key := range m {
-	// 	keys = append(keys, key)
-	// }
-	// sort.SliceStable(keys, func(i, j int) bool {
-	// 	return m[keys[i]] > m[keys[j]]
-	// })
+	for key := range m {
+		keys = append(keys, key)
+	}
+	sort.SliceStable(keys, func(i, j int) bool {
+		return m[keys[i]] > m[keys[j]]
+	})
 
-	// for _, k := range keys {
+	for _, k := range keys {
 
-	// 	fmt.Println(GetUserByID(con,k),"==> Count Items:",m[k])
+		fmt.Println(k, m[k])
+	}
 
-	// 	break
+	
+}
 
-	// }
+
+func Task_10(con *controller.Controller) {
+	respOrder, err := con.OrderGetList(&models.OrderGetListRequest{
+		Offset: 0,
+		Limit:  10,
+	})
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+
+	var list []string
+
+	for _, val := range respOrder.Orders {
+
+		if val.Status {
+			list = append(list, val.UserId)
+		}
+	}
+	m := make(map[string]int)
+
+	for _, value := range list {
+		k := 0
+		for _, val := range respOrder.Orders {
+			if value == val.UserId && val.Status {
+				k += val.Count
+			}
+		}
+		m[value] = k
+	}
+
+	keys := make([]string, 0, len(m))
+
+	for key := range m {
+		keys = append(keys, key)
+	}
+	sort.SliceStable(keys, func(i, j int) bool {
+		return m[keys[i]] > m[keys[j]]
+	})
+
+	for _, k := range keys {
+
+		fmt.Println(GetUserByID(con,k),"==> Count Items:",m[k])
+
+		break
+
+	}
 }
 
 // /*			Task-----9			*/
 
-// func CategoryGetList(con *controller.Controller){
-// 	respCtg,err:=con.CategoryGetList(&models.CategoryGetListRequest{
-// 		Offset: 0,
-// 		Limit: 10,
-// 	})
+func Task_9(con *controller.Controller) {
+	respCtg, err := con.CategoryGetList(&models.CategoryGetListRequest{
+		Offset: 0,
+		Limit:  10,
+	})
 
-// 	if err!=nil{
-// 		fmt.Println(err)
-// 	}
+	if err != nil {
+		fmt.Println(err)
+	}
 
-// 	var (
-// 		list []string
+	var (
+		list []string
+	)
 
-// 	)
+	for _, val := range respCtg.Categorys {
+		list = Task_9_2(con, val.Id)
 
-// 	for _,val:=range respCtg.Categorys{
-// 		list = ProductGetList(con, val.Id)
+		count := Task_9_1(con, list)
+		fmt.Println(val.Name, count)
+	}
+}
 
-// 		count  :=OrderGetList(con, list)
-// 		fmt.Println(val.Name,count)
-// 	}
-// }
+func Task_9_1(con *controller.Controller, list []string) int {
 
-// func OrderGetList(con *controller.Controller, list []string) int{
+	respOrder, err := con.OrderGetList(&models.OrderGetListRequest{
+		Offset: 0,
+		Limit:  10,
+	})
 
-// 	respOrder, err := con.OrderGetList(&models.OrderGetListRequest{
-// 		Offset: 0,
-// 		Limit:  10,
-// 	})
+	if err != nil {
+		fmt.Println(err)
+	}
 
-// 	if err != nil {
-// 		fmt.Println(err)
-// 	}
+	m := make(map[string]int)
 
-// 	m := make(map[string]int)
+	for _, productId := range list {
+		count := 0
+		for _, val := range respOrder.Orders {
+			if val.ProductId == productId && val.Status {
 
-// 	for _, productId := range list {
-// 		count := 0
-// 		for _, val := range respOrder.Orders {
-// 			if val.ProductId == productId && val.Status {
+				count += val.Count
+			}
+		}
+		m[productId] = count
 
-// 				count += val.Count
-// 			}
-// 		}
-// 		m[productId] = count
+	}
+	sum := 0
 
-// 	}
-// 	sum := 0
+	for _, val := range m {
+		sum += val
+	}
+	return sum
 
-// 	for _, val := range m {
-// 		sum += val
-// 	}
-// 	return sum
+}
 
-// }
+func Task_9_2(con *controller.Controller, categoryId string) []string {
+	respProducts, err := con.ProductGetList(&models.ProductGetListRequest{
+		Offset: 0,
+		Limit:  10,
+	})
+	var ls []string
+	if err != nil {
+		fmt.Println(err)
+	}
+	for _, val := range respProducts.Products {
+		if val.CategoryID == categoryId {
 
-// func ProductGetList(con *controller.Controller, categoryId string) []string {
-// 	respProducts, err := con.ProductGetList(&models.ProductGetListRequest{
-// 		Offset: 0,
-// 		Limit:  10,
-// 	})
-// 	var ls []string
-// 	if err != nil {
-// 		fmt.Println(err)
-// 	}
-// 	for _, val := range respProducts.Products {
-// 		if val.CategoryID == categoryId {
+			ls = append(ls, val.Id)
 
-// 			ls = append(ls, val.Id)
-
-// 		}
-// 	}
-// 	return ls
-// }
+		}
+	}
+	return ls
+}
 
 func GetUserByID(con *controller.Controller, id string) string {
 	respUsr, err := con.UserGetById(&models.UserPrimaryKey{
