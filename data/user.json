@@ -1,0 +1,26 @@
+[
+	{
+		"id": "76d58bdf-bca7-4484-846c-36383327f03c",
+		"first_name": "Asadbek",
+		"last_name": "Ergashev",
+		"balance": 1620000
+	},
+	{
+		"id": "e8ad38be-d133-487b-9f2e-2545f0462f2e",
+		"first_name": "Otabek",
+		"last_name": "Karimjonov",
+		"balance": 800000000
+	},
+	{
+		"id": "ef6f1a11-b350-46d1-b300-4c0992db5702",
+		"first_name": "Asadbek",
+		"last_name": "Ergashev",
+		"balance": 200000
+	},
+	{
+		"id": "fbf00c98-d742-4d9c-8a99-a1542e7c9680",
+		"first_name": "Jony",
+		"last_name": "Tim",
+		"balance": 200000
+	}
+]

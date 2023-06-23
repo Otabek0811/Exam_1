@@ -1,0 +1,32 @@
+[
+	{
+		"id": "46a65fb0-650b-4b4a-a878-ce0d1539adb2",
+		"name": "Matematika",
+		"price": 15000,
+		"category_id": "63f835a6-3b44-419b-94ea-c5f8d406c796"
+	},
+	{
+		"id": "7b32782a-2663-47b3-8fbb-ceb2892b4cc8",
+		"name": "Learning Golang",
+		"price": 200000,
+		"category_id": "63f835a6-3b44-419b-94ea-c5f8d406c796"
+	},
+	{
+		"id": "b5269f09-c49d-4fe7-8c5f-c4148abee8c9",
+		"name": "Clean Code",
+		"price": 350000,
+		"category_id": "8ca2dea0-eff2-4ba4-978f-763efab6bc50"
+	},
+	{
+        "id": "ffa888f7-e0cb-44e9-9cae-8c4ca2a115b9",
+        "name": "Pijama",
+        "price": 38000,
+        "category_id": "c114c821-2427-4279-8713-eacae9175bbc"
+    },
+    {
+        "id": "0a38e50d-0749-4bef-b6bc-ec9f3206f09a",
+        "name": "Sviter",
+        "price": 75000,
+        "category_id": "c114c821-2427-4279-8713-eacae9175bbc"
+    }
+]
